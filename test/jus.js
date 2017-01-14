@@ -390,7 +390,7 @@ describe('jus', function () {
       page.render(context, function(err, output) {
         var $ = cheerio.load(output)
         expect($('html').length).to.equal(1)
-        expect($('#default-layout').text()).to.include('I am the fixtures index\n')
+        expect($('#default-layout').text()).to.include('I am the fixtures index')
         done()
       })
     })
