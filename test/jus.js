@@ -173,12 +173,21 @@ describe('jus', function () {
       expect(pages['/other/papayas.markdown'].input).to.be.a('string')
     })
 
-    they('convert markdown to HTML', function () {
-      var $ = pages['/other/papayas.markdown'].$
-      expect($('a[href="https://digestion.com"]').text()).to.equal('digestion')
+    they('convert markdown to HTML', function (done) {
+// code commented now that handlebars go before DOM convertion
+//      var $ = pages['/other/papayas.markdown'].$
+//      expect($('a[href="https://digestion.com"]').text()).to.equal('digestion')
+// equivalent code:
+      var page =  pages['/other/papayas.markdown']
+      page.render(context, function(err, output){
+        var $ = cheerio.load(output)
+        expect($('a[href="https://digestion.com"]').text()).to.equal('digestion')
+        done()
+      })
     })
 
     they('have a cheerio DOM object ($)', function () {
+      // This test depends on previous execution of page.render()
       var $ = pages['/other/papayas.markdown'].$
       expect($).to.exist
       expect($.text).to.be.a('function')
@@ -312,7 +321,11 @@ describe('jus', function () {
         expect(pages['/apples.md'].title).to.equal('Apples!')
       })
 
-      it('falls back to <title> tag, if present', function () {
+      it('falls back to <title> tag, if present', function (done) {
+        // Need to render first due to priority change of handlebars over DOM
+        pages['/oranges.html'].render(context, function(err, output){
+          done()
+        })
         expect(pages['/oranges.html'].title).to.equal('We are Oranges')
       })
 
