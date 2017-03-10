@@ -76,6 +76,7 @@
     "lobars": "^1.2.0",
     "lodash": "^4.0.0",
     "markdown-toc": "^1.1.0",
+    "marky-markdown": "^8.1.0",
     "minimist": "^1.2.0",
     "morgan": "^1.6.1",
     "myth": "^1.5.0",
