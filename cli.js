@@ -17,6 +17,7 @@ if (args._[1]) var sourceDir = path.resolve(process.cwd(), args._[1])
 if (args._[2]) var targetDir = path.resolve(process.cwd(), args._[2])
 process.env.JUS_PORT = args.port || args.p || 3000
 process.env.JUS_BASEDIR = args.basedir || args.b || '/'
+process.env.JUS_API_ENDPOINT_NAME = args.api || args.a || 'api'
 
 switch(command) {
   case 'sers':
